@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- SCRIPTS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="scripts/player/player-browse-tournament.js"></script>
+
+    <!-- STYLES -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>Browse Events</title>
+  </head>
+  <body
+    style="background-color: gainsboro"
+    ng-app="PlayerBrowseTournamentModule"
+    ng-controller="PlayerBrowseTournamentController"
+    ng-cloak
+  >
+    <header
+      class="mb-3"
+      style="
+        width: 100%;
+        line-height: 50px;
+        background-color: cadetblue;
+        color: white;
+        padding-left: 20px;
+      "
+    >
+      Header
+    </header>
+
+    <!-- *************************************************************************************************** -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <h1>Filters:</h1>
+          <div
+            class="row text-center md-3 mb-4 d-flex justify-content-center g-3"
+          >
+            <div class="col-md-4 d-flex justify-content-center">
+              <div class="input-group">
+                <label
+                  class="input-group-text col-md-4"
+                  for="selectSportPlayerBrowse"
+                  >Sport:</label
+                >
+                <select
+                  id="selectSportPlayerBrowse"
+                  class="form-select col-md-8"
+                  ng-model="selectSportPlayerBrowse"
+                >
+                  <option selected value="">Select</option>
+                  <option ng-repeat="obj in sportArray" value="{{obj.sport}}">
+                    {{obj.sport}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+              <div class="input-group">
+                <label
+                  class="input-group-text col-md-4"
+                  for="selectCityPlayerBrowse"
+                  >City:</label
+                >
+                <select
+                  id="selectCityPlayerBrowse"
+                  class="form-select col-md-8"
+                  ng-model="selectCityPlayerBrowse"
+                >
+                  <option selected value="">Select</option>
+                  <option ng-repeat="obj in cityArray" value="{{obj.city}}">
+                    {{obj.city}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="col-md-6 d-flex justify-content-center"
+              ng-init="fxSetFilterAgeRange();"
+            >
+              <div class="input-group">
+                <label for="rangeAgePlayerBrowse" class="form-label"
+                  >Age:</label
+                >
+                <output
+                  for="rangeAgePlayerBrowse"
+                  class="pl-1"
+                  ng-model="outputAgePlayerBrowse"
+                  aria-hidden="true"
+                  >{{outputAgePlayerBrowse}}</output
+                >
+                <input
+                  type="range"
+                  class="form-range"
+                  min="{{minAge}}"
+                  max="{{maxAge}}"
+                  value="{{rangeAgePlayerBrowse}}"
+                  id="rangeAgePlayerBrowse"
+                  ng-model="rangeAgePlayerBrowse"
+                  ng-change="setRangeOutput();"
+                  aria-describedby="outputAgePlayerBrowse"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="text-center md-3 mb-4">
+            <button
+              class="col-md-3 mx-auto btn btn-primary"
+              type="button"
+              ng-click="fxFetchFilteredTournaments();"
+            >
+              Search
+            </button>
+            <button
+              class="col-md-3 mx-auto btn btn-primary"
+              type="button"
+              ng-click="fxResetFilters();"
+            >
+              Reset Filters
+            </button>
+          </div>
+          <h1>Events</h1>
+          <h2>Upcoming:</h2>
+          <div class="row text-center md-3">
+            <table class="table table-hover mt-3">
+              <tr class="text-center">
+                <th>Sr. No.</th>
+                <th>Event Title</th>
+                <th>Date of Event</th>
+                <th>Venue</th>
+                <th>Age Range</th>
+                <th>Last Date of Reg.</th>
+                <th>Fee</th>
+                <th>Prize</th>
+              </tr>
+              <tr class="text-center" ng-repeat="obj in upcomingEvents">
+                <td>{{$index+1}}</td>
+                <td>{{obj.eventTitle}}</td>
+                <td>{{obj.dateOfEvent}}</td>
+                <td>{{obj.venue}}</td>
+                <td>{{obj.minAge}} - {{obj.maxAge}}</td>
+                <td>{{obj.lastDateOfRegistration}}</td>
+                <td>{{obj.participationFee}}₹</td>
+                <td>{{obj.prize}}₹</td>
+              </tr>
+            </table>
+          </div>
+          <h2>Past:</h2>
+          <div class="row text-center md-3">
+            <table class="table table-hover mt-3">
+              <tr class="text-center">
+                <th>Sr. No.</th>
+                <th>Event Title</th>
+                <th>Date of Event</th>
+                <th>Venue</th>
+                <th>Age Range</th>
+                <th>Last Date of Reg.</th>
+                <th>Fee</th>
+                <th>Prize</th>
+              </tr>
+              <tr class="text-center" ng-repeat="obj in pastEvents">
+                <td>{{$index+1}}</td>
+                <td>{{obj.eventTitle}}</td>
+                <td>{{obj.dateOfEvent}}</td>
+                <td>{{obj.venue}}</td>
+                <td>{{obj.minAge}} - {{obj.maxAge}}</td>
+                <td>{{obj.lastDateOfRegistration}}</td>
+                <td>{{obj.participationFee}}₹</td>
+                <td>{{obj.prize}}₹</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

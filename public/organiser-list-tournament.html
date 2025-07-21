@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- SCRIPTS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts/organiser/organiser-list-tournament.js"></script>
+
+    <!-- STYLES -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Organiser Dashboard</title>
+  </head>
+  <body
+    ng-app="organiserListTournamentModule"
+    ng-controller="organiserListTournamentController"
+  >
+    <header
+      style="
+        width: 100%;
+        line-height: 50px;
+        background-color: cadetblue;
+        color: white;
+        padding-left: 20px;
+      "
+    >
+      Header
+    </header>
+
+    <!-- ********************************************************************************************************* -->
+    <div class="container bg-white pb-3">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <form
+              class="row g-3 mt-3"
+              method="get"
+              action="/organiser-list-tournament-savedata"
+            >
+              <div class="col-md-8">
+                <label for="txtEmailOrgTournament" class="form-label"
+                  >Email ID</label
+                >
+                <div class="input-group">
+                  <input
+                    type="email"
+                    class="form-control col-md-9"
+                    id="txtEmailOrgTournament"
+                    name="txtEmailOrgTournament"
+                    placeholder="example@gmail.com"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="txtNameOrgTournament" class="form-label"
+                  >Event Title</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtNameOrgTournament"
+                  name="txtNameOrgTournament"
+                  placeholder="Your Event's Name"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="dateOrgTournament" class="form-label"
+                  >Date of Event</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dateOrgTournament"
+                  name="dateOrgTournament"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="timeOrgTournament" class="form-label"
+                  >Time of Event</label
+                >
+                <input
+                  type="time"
+                  class="form-control"
+                  id="timeOrgTournament"
+                  name="timeOrgTournament"
+                />
+              </div>
+              <div class="col-md-12">
+                <label for="txtVenueOrgTournament" class="form-label"
+                  >Venue</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtVenueOrgTournament"
+                  name="txtVenueOrgTournament"
+                  placeholder="#Zone, Street No., Locality..."
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="txtCityOrgTournament" class="form-label"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtCityOrgTournament"
+                  name="txtCityOrgTournament"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="comboStateOrgTournament" class="form-label"
+                  >State</label
+                >
+                <!-- <input type="text" id="comboStateOrgTournament" name="comboStateOrgTournament" class="form-control"> -->
+                <select id="comboStateOrgProfile" class="form-select">
+                  <option selected>Choose...</option>
+                  <option ng-repeat="state in states">{{state}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="txtZipOrgTournament" class="form-label">Zip</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtZipOrgTournament"
+                  name="txtZipOrgTournament"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="txtSportsOrgTournament" class="form-label"
+                  >Sports Category</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtSportsOrgTournament"
+                  name="txtSportsOrgTournament"
+                  placeholder="Ex: Cricket, Tennis, Football, Volleyball, etc"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="numMinAgeOrgTournament" class="form-label"
+                  >Minimum Age</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="numMinAgeOrgTournament"
+                  name="numMinAgeOrgTournament"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="numMaxAgeOrgTournament" class="form-label"
+                  >Maximum Age</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="numMaxAgeOrgTournament"
+                  name="numMaxAgeOrgTournament"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="dateLastOrgTournament" class="form-label"
+                  >Last Registration Date</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dateLastOrgTournament"
+                  name="dateLastOrgTournament"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="numFeeOrgTournament" class="form-label">Fee</label>
+                <div class="input-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="numFeeOrgTournament"
+                    name="numFeeOrgTournament"
+                  />
+                  <div class="input-group-text">₹</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="numPrizeOrgTournament" class="form-label"
+                  >Prize</label
+                >
+                <div class="input-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="numPrizeOrgTournament"
+                    name="numPrizeOrgTournament"
+                  />
+                  <div class="input-group-text">₹</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="txtManagerNameOrgTournament" class="form-label"
+                  >Event Manager's Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtManagerNameOrgTournament"
+                  name="txtManagerNameOrgTournament"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="txtManagerContactOrgTournament" class="form-label"
+                  >Event Manager's Contact</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="txtManagerContactOrgTournament"
+                  name="txtManagerContactOrgTournament"
+                  placeholder="Ex: +91 9998887777"
+                />
+              </div>
+              <div class="col-md-12">
+                <label for="msgOtherOrgTournament" class="form-label"
+                  >Other Details</label
+                >
+                <input
+                  type="message"
+                  class="form-control"
+                  id="msgOtherOrgTournament"
+                  name="msgOtherOrgTournament"
+                />
+              </div>
+              <div class="col-md-3 mx-auto justify-content-md-center">
+                <div class="row" style="gap: 2rem">
+                  <button type="submit" class="btn btn-primary col">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>

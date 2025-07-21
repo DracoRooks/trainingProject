@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="scripts/index.js"></script>
+
+    <!-- STYLES -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <title>Sports Website</title>
+  </head>
+  <body style="background-color: gainsboro;">
+    <header style="width: 100%; line-height: 50px; background-color: cadetblue; color: white; padding-left: 20px;">Header</header>
+    <div class="container d-grid col-md-6 justify-content-md-center mt-4">
+      <div class="d-inline-flex gap-4">
+        <form><button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal" id="signup">Signup</button></form>
+        <form><button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal" id="login">Login</button></form>
+        <!-- <form action="/organiser-dashboard"><button type="submit" class="btn btn-light" id="orgDash">Organiser Dashboard</button></form> -->
+        <!-- <form action="/player-dashboard"><button type="submit" class="btn btn-light" id="playDash">Player Dashboard</button></form> -->
+      </div>
+    </div>
+    <div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="signupModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form action="/signup">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signupModalLongTitle">Signup</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="txtEmailSignup" class="form-label">Email:</label>
+                <div class="input-group">
+                  <input type="text" class="form-control signup-modal-input emailValidate" id="txtEmailSignup" placeholder="example@gmail.com" aria-errormessage="email-validation-signup">
+                  <!-- <select class="form-select input-group-text" id="comboEmailExtension">
+                    <option selected value="0">@gmail.com</option>
+                    <option value="1">@outlook.com</option>
+                    <option value="2">@yahoo.com</option>
+                  </select> -->
+                </div>
+                <div class="form-text" id="email-validation-signup"></div>
+              </div>
+              <div class="mb-3">
+                <label for="txtPwdSignup1" class="form-label">Password:</label>
+                <div class="input-group">
+                  <input type="password" class="form-control passwordValidate signup-modal-input" id="txtPwdSignup1" aria-errormessage="password1-validation-signup">
+                  <button class="btn btn-outline-secondary btn-toggle-password-signup" type="button" id="btn-toggle-password1-signup" aria-controls="txtPwdSignup1" aria-describedby="icon-toggle-password1-signup">
+                    <i class="fa-solid fa-eye" id="icon-toggle-password1-signup"></i>
+                  </button>
+                </div>
+                <div class="form-text" id="password1-validation-signup">We won't share your password!</div>
+              </div>
+              <div class="mb-3">
+                <label for="txtPwdSignup2" class="form-label">Re-enter your password:</label>
+                <div class="input-group">
+                  <input type="password" class="form-control passwordValidate signup-modal-input" id="txtPwdSignup2" aria-errormessage="password2-validation-signup">
+                  <button class="btn btn-outline-secondary btn-toggle-password-signup" type="button" id="btn-toggle-password2-signup" aria-controls="txtPwdSignup2" aria-describedby="icon-toggle-password2-signup">
+                    <i class="fa-solid fa-eye" id="icon-toggle-password2-signup"></i>
+                  </button>
+                </div>
+                <div class="form-text" id="password2-validation-signup"></div>
+              </div>
+              <div class="mb-3">
+                <label for="comboUserTypeSignup" class="form-label">User Type:</label>
+                <div class="input-group">
+                  <select class="form-select signup-modal-input" id="comboUserTypeSignup">
+                    <option selected value="0">Select</option>
+                    <option value="1">Player</option>
+                    <option value="2">Organiser</option>
+                  </select>
+                </div>
+                <div class="form-text" id="userType-validation-signup"></div>
+              </div>
+                <div class="form-text" id="modal-validation-signup"></div>
+            </div>
+            <div class="modal-footer">
+              <div class="d-grid col-md-10 mx-auto">
+                <button type="button" class="btn btn-primary btn-center" id="AJAXSignup">Signup</button>
+              </div>
+            </div>
+            <div class="form-text text-center mb-2" id="signup-to-login">
+              Already have an account? <a href="#loginModal" data-bs-dismiss="modal" data-bs-target="#loginModal" data-bs-toggle="modal">Login</a> instead!
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form action="/login">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLongTitle">Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="txtEmailLogin" class="form-label">Email:</label>
+                <div class="input-group">
+                  <input type="text" class="form-control emailValidate" id="txtEmailLogin" placeholder="example@gmail.com" aria-errormessage="email-validation-login">
+                </div>
+                <div class="form-text" id="email-validation-login"></div>
+              </div>
+              <div class="mb-3">
+                <label for="txtPwdLogin" class="form-label">Enter your password:</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="txtPwdLogin" aria-errormessage="password-validation-login">
+                </div>
+                <div class="form-text" id="password-validation-login">We won't share your password!</div>
+              </div>
+            <div class="modal-footer">
+              <div class="d-grid col-md-10 mx-auto">
+                <button type="button" class="btn btn-primary mb-3" id="AJAXLogin">Login</button>
+                <div class="form-text text-center" id="forgot-password-login">
+                  <a href="">Forgot password?</a>
+                </div>
+              </div>
+            </div>
+            <div class="form-text text-center mb-2" id="login-to-signup">
+              Don't have an account? <a href="#signup" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal">Register</a> instead!
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer style="width: 100%; line-height: 50px; background-color: cadetblue; color: white;">Footer</footer>
+  </body>
+</html>
