@@ -7,6 +7,7 @@ const mailer = require("nodemailer");
 const mysql2 = require("mysql2");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const dotenv = require("dotenv").config(); // is to load the .env file into process.env
+const port = process.env.PORT || 2000;
 
 // CLUES AND HINTS
 website.use(express.static("public")); // so that the server looks in ./public folder when checking for page hits
@@ -33,7 +34,7 @@ const genAIObject = new GoogleGenerativeAI(process.env.GOOGLE_AI_STUDIO_API);
 const genAIModel = genAIObject.getGenerativeModel({model: process.env.GOOGLE_AI_MODEL});
 
 // LISTENING PORT
-website.listen(2000, "localhost", function(err){
+website.listen(port, "localhost", function(err){
     if(err){
         console.log("PORT::ERROR: " + err);
     } else {

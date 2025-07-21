@@ -119,3 +119,11 @@ Query_final: select * from tournaments where sport = 'wefawef' and city = 'rw' a
     otherInformation: 'edwe'
   }
 ]
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.1.0] injecting env (6) from .env (tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' })
+PORT::INFO::LISTENING ON PORT 2000
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[dotenv@17.1.0] injecting env (6) from .env (tip: ⚙️  enable debug logging with { debug: true })
+PORT::INFO::LISTENING ON PORT 2000
