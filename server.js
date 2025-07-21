@@ -34,11 +34,11 @@ const genAIObject = new GoogleGenerativeAI(process.env.GOOGLE_AI_STUDIO_API);
 const genAIModel = genAIObject.getGenerativeModel({model: process.env.GOOGLE_AI_MODEL});
 
 // LISTENING PORT
-website.listen(port, "localhost", function(err){
+website.listen(port, "0.0.0.0", function(err){
     if(err){
         console.log("PORT::ERROR: " + err);
     } else {
-        console.log("PORT::INFO::LISTENING ON PORT 2000");
+        console.log(`PORT::INFO::LISTENING ON PORT: ${port}`);
     }
 })
 website.get("/", function(req, res){
