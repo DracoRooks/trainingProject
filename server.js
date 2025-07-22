@@ -15,12 +15,21 @@ website.use(express.urlencoded(true)); // so that the binary data sent by form.m
 website.use(fileHandler()); // to recieve files such as pics, etc
 
 // AIVEN MYSQL CONNECTIVITY
-const aievnConfigURI = process.env.AIVEN_CONFIG_URI;
-const mySQLServer = mysql2.createConnection(aievnConfigURI);
-mySQLServer.connect(function(err){
-    if(err)
-        console.log("[ERROR]::AIVEN_CONNECT_FAILED: " + err);
+const mySQLServer = mysql2.createPool(process.env.AIVEN_CONFIG_URI);
+
+// server.createConnection() returned a 'connection' while server.createPool() returns a pool of connections, 
+// hence the callback checks each connection individually and passes it as a parameter
+mySQLServer.getConnection(function(err, connection){
+    if(err){
+        console.log("[ERROR]::AIVEN_CONNECTION_FAILED: " + err);
+        return;
+    }
+    connection.release()
 })
+
+console.log("Max Pool Size:", mySQLServer.config.connectionLimit);
+console.log("Free Connections:", mySQLServer._freeConnections.length);
+console.log("Total Connections:", mySQLServer._allConnections.length);
 
 // CLOUDINARY CONFIG
 cloudinary.config({
@@ -38,7 +47,7 @@ website.listen(port, "0.0.0.0", function(err){
     if(err){
         console.log("PORT::ERROR: " + err);
     } else {
-        console.log(`PORT::INFO::LISTENING ON PORT: ${port}`);
+        console.log("PORT::INFO::LISTENING ON PORT: " + port);
     }
 })
 website.get("/", function(req, res){
@@ -200,6 +209,15 @@ website.get("/player-fetch-min-max-ages", function(req, res){
             console.log("[ERROR]::QUERY_SELECT::FETCHING_MIN_MAX_AGES: " + err);
         } else {
             // console.log(allRecords);
+            res.send(allRecords);
+        }
+    })
+})
+website.get("/player-fetch-unfiltered-tournaments", function(req, res){
+    mySQLServer.query("select * from tournaments", function(err, allRecords){
+        if(err){
+            console.log("[ERROR]::QUERY_SELECT::FETCH_UNFILTERED_TOURNAMENTS: " + err)
+        } else {
             res.send(allRecords);
         }
     })
