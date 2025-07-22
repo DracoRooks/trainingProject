@@ -5,6 +5,48 @@ const controller = module.controller("PlayerBrowseTournamentController", functio
     fxDistinctCities();
     
     // *****************************    FETCHING FILTERED EVENTS    *****************************
+
+    // initial on page-load
+    $scope.fxFetchUnfilteredTournaments = function(){
+        // alert("Oi");
+        const url = "/player-fetch-unfiltered-tournaments";
+        $http.get(url).then(fxFetchedWell, fxFetchedBad);
+        
+        function fxFetchedWell(response) {
+            $scope.jsonArray = response.data;
+            $scope.upcomingEvents = []; // re-initialising both scope arrays to flush previous ones
+            $scope.pastEvents = [];
+            
+            // alert(JSON.stringify(response));
+            // removing the timestamp from the date and changing the format from YYYY-MM-DD to Do MMMM, YYYY
+            // segregating tournaments based on if they are history or upcoming
+            for (let i = 0; i < $scope.jsonArray.length; i++) {
+                const element = $scope.jsonArray[i];
+
+                element.dateOfEvent = element.dateOfEvent.slice(0, 10);
+                element.lastDateOfRegistration = element.lastDateOfRegistration.slice(0, 10);
+                
+                //--------------------------------------------------------
+                
+                if(moment().isAfter(moment(element.dateOfEvent))) {
+                    // alert("new element in pastEvents:\n" + JSON.stringify(element));
+                    element.dateOfEvent = moment(element.dateOfEvent).format('Do MMMM, YYYY');
+                    $scope.pastEvents.push(element);
+                } else if(moment().isBefore(moment(element.dateOfEvent))) {
+                    // alert("new element in upcomingEvents:\n" + JSON.stringify(element));
+                    element.dateOfEvent = moment(element.dateOfEvent).format('Do MMMM, YYYY');
+                    $scope.upcomingEvents.push(element);
+                } else { alert("kuchh toh gadbad hai daya"); }
+                
+                element.lastDateOfRegistration = moment(element.lastDateOfRegistration).format('Do MMMM, YYYY');
+            }
+        }
+        function fxFetchedBad(err){
+            alert(err);
+        }
+    }
+
+    // filtered, on search clicked
     $scope.fxFetchFilteredTournaments = function(){
         // alert("hello");
         // alert($scope.selectSportPlayerBrowse);
@@ -22,7 +64,7 @@ const controller = module.controller("PlayerBrowseTournamentController", functio
             $scope.pastEvents = [];
             
             // alert(JSON.stringify(response));
-            // removing the timestamp from the date and changing the format from YYYY-MM-DD to DD-MM-YYYY
+            // removing the timestamp from the date and changing the format from YYYY-MM-DD to Do MMMM, YYYY
             // segregating tournaments based on if they are history or upcoming
             for (let i = 0; i < $scope.jsonArray.length; i++) {
                 const element = $scope.jsonArray[i];
