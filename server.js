@@ -17,19 +17,9 @@ website.use(fileHandler()); // to recieve files such as pics, etc
 // AIVEN MYSQL CONNECTIVITY
 const mySQLServer = mysql2.createPool(process.env.AIVEN_CONFIG_URI);
 
-// server.createConnection() returned a 'connection' while server.createPool() returns a pool of connections, 
-// hence the callback checks each connection individually and passes it as a parameter
-mySQLServer.getConnection(function(err, connection){
-    if(err){
-        console.log("[ERROR]::AIVEN_CONNECTION_FAILED: " + err);
-        return;
-    }
-    connection.release()
-})
-
-console.log("Max Pool Size:", mySQLServer.config.connectionLimit);
-console.log("Free Connections:", mySQLServer._freeConnections.length);
-console.log("Total Connections:", mySQLServer._allConnections.length);
+// console.log("Max Pool Size:", mySQLServer.config.connectionLimit);
+// console.log("Free Connections:", mySQLServer._freeConnections.length);
+// console.log("Total Connections:", mySQLServer._allConnections.length);
 
 // CLOUDINARY CONFIG
 cloudinary.config({
