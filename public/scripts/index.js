@@ -1,3 +1,45 @@
+angular.module("indexModule", []).controller("indexController", function($scope, $timeout){
+    $scope.indexMainDynamicText = "";
+    // alert("bich");
+
+    var arrayOfTexts = [
+        "Unleash your potential, one game at a time.",
+        "Your next challenge is waiting. Are you ready?",
+        "The best tournaments, right at your fingertips.",
+        "From practice to podium, we've got you covered.",
+        "Join the game. Find your glory.",
+        "Your sports journey starts here.",
+        "Organize and Register Seamlessly!",
+        "Connect. Compete. Conquer."
+    ]
+
+    var textIndex = 0;
+    var charIndex = 0;
+    var writing = true;
+
+    function dynamicTextType(){
+        var currentText = arrayOfTexts[textIndex];
+
+        if(writing) { // means writing
+            $scope.indexMainDynamicText = currentText.slice(0, charIndex++);
+            if(charIndex == currentText.length + 1) {
+                writing = false;
+                $timeout(dynamicTextType, 1600)
+            } else $timeout(dynamicTextType, 40);
+        } else { // means deleting
+            $scope.indexMainDynamicText = currentText.slice(0, charIndex--);
+            if(charIndex == 0) {
+                writing = true;
+                textIndex = (textIndex + 1) % arrayOfTexts.length;
+                // charIndex = 0;
+                $timeout(dynamicTextType, 80);
+            } else $timeout(dynamicTextType, 10);
+        }
+    }
+
+    dynamicTextType();
+})
+
 let signupEmailFlag = false;
 let signupPasswordFlag = false;
 let signupComboFlag = false;
@@ -124,11 +166,11 @@ $(document).ready(function(){
         // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
         let passwordRegex4 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        let numberRegex = /^(?=.*\d)[A-Za-z\d@$!%*?&]{1,}$/;
-        let symbolRegex = /^(?=.*[@$!%*#?&])[A-Za-z\d@$!%*?&]{1,}$/;
-        let lowercaseRegex = /^(?=.*[a-z])[A-Za-z\d@$!%*?&]{1,}$/;
-        let uppercaseRegex = /^(?=.*[A-Z])[A-Za-z\d@$!%*?&]{1,}$/;
-        let characterCountRegex = /^[A-Za-z\d@$!%*?&]{8,}$/;
+        let numberRegex = /^(?=.*\d)[A-Za-z\d@_#-$!%*?&]{1,}$/;
+        let symbolRegex = /^(?=.*[@$!%*#?&])[A-Za-z\d@_#-$!%*?&]{1,}$/;
+        let lowercaseRegex = /^(?=.*[a-z])[A-Za-z\d@_#-$!%*?&]{1,}$/;
+        let uppercaseRegex = /^(?=.*[A-Z])[A-Za-z\d@_#-$!%*?&]{1,}$/;
+        let characterCountRegex = /^[A-Za-z\d@_#-$!%*?&]{8,}$/;
 
         let pass1 = $(this).val();
         let passwordValidationDivRef = "#" + $(this).attr("aria-errormessage");
