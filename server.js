@@ -123,7 +123,8 @@ website.get("/organiser-list-tournament", function(req, res){
 })
 website.get("/organiser-list-tournament-savedata", function(req, res){
     mySQLServer.query("insert into tournaments values(null,?,?,current_date(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [req.query.txtEmailOrgTournament,
+        [
+            req.query.txtEmailOrgTournament,
             req.query.txtNameOrgTournament, 
             req.query.dateOrgTournament, 
             req.query.timeOrgTournament, 
