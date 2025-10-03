@@ -153,52 +153,60 @@
           <h1>Events</h1>
           <h2>Upcoming:</h2>
           <div class="row text-center md-3">
-            <table class="table table-hover mt-3">
-              <tr class="text-center">
-                <th>Sr. No.</th>
-                <th>Event Title</th>
-                <th>Date of Event</th>
-                <th>Venue</th>
-                <th>Age Range</th>
-                <th>Last Date of Reg.</th>
-                <th>Fee</th>
-                <th>Prize</th>
-              </tr>
-              <tr class="text-center" ng-repeat="obj in upcomingEvents">
-                <td>{{$index+1}}</td>
-                <td>{{obj.eventTitle}}</td>
-                <td>{{obj.dateOfEvent}}</td>
-                <td>{{obj.venue}}</td>
-                <td>{{obj.minAge}} - {{obj.maxAge}}</td>
-                <td>{{obj.lastDateOfRegistration}}</td>
-                <td>{{obj.participationFee}}₹</td>
-                <td>{{obj.prize}}₹</td>
-              </tr>
+            <table class="table table-stripped table-hover mt-3">
+              <thead>
+                <tr class="text-center">
+                  <th>Sr. No.</th>
+                  <th>Event Title</th>
+                  <th>Date of Event</th>
+                  <th>Venue</th>
+                  <th>Age Range</th>
+                  <th>Last Date of Reg.</th>
+                  <th>Fee</th>
+                  <th>Prize</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" ng-repeat="obj in upcomingEvents">
+                  <td>{{$index+1}}</td>
+                  <td>{{obj.eventTitle}}</td>
+                  <td>{{obj.dateOfEvent}}</td>
+                  <td>{{obj.venue}}</td>
+                  <td>{{obj.minAge}} - {{obj.maxAge}}</td>
+                  <td>{{obj.lastDateOfRegistration}}</td>
+                  <td>{{obj.participationFee}}₹</td>
+                  <td>{{obj.prize}}₹</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <h2>Past:</h2>
           <div class="row text-center md-3">
-            <table class="table table-hover mt-3">
-              <tr class="text-center">
-                <th>Sr. No.</th>
-                <th>Event Title</th>
-                <th>Date of Event</th>
-                <th>Venue</th>
-                <th>Age Range</th>
-                <th>Last Date of Reg.</th>
-                <th>Fee</th>
-                <th>Prize</th>
-              </tr>
-              <tr class="text-center" ng-repeat="obj in pastEvents">
-                <td>{{$index+1}}</td>
-                <td>{{obj.eventTitle}}</td>
-                <td>{{obj.dateOfEvent}}</td>
-                <td>{{obj.venue}}</td>
-                <td>{{obj.minAge}} - {{obj.maxAge}}</td>
-                <td>{{obj.lastDateOfRegistration}}</td>
-                <td>{{obj.participationFee}}₹</td>
-                <td>{{obj.prize}}₹</td>
-              </tr>
+            <table class="table table-stripped table-hover mt-3">
+              <thead>
+                <tr class="text-center">
+                  <th>Sr. No.</th>
+                  <th>Event Title</th>
+                  <th>Date of Event</th>
+                  <th>Venue</th>
+                  <th>Age Range</th>
+                  <th>Last Date of Reg.</th>
+                  <th>Fee</th>
+                  <th>Prize</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" ng-repeat="obj in pastEvents">
+                  <td>{{$index+1}}</td>
+                  <td>{{obj.eventTitle}}</td>
+                  <td>{{obj.dateOfEvent}}</td>
+                  <td>{{obj.venue}}</td>
+                  <td>{{obj.minAge}} - {{obj.maxAge}}</td>
+                  <td>{{obj.lastDateOfRegistration}}</td>
+                  <td>{{obj.participationFee}}₹</td>
+                  <td>{{obj.prize}}₹</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
