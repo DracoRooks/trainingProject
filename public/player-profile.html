@@ -55,31 +55,38 @@
     <div class="container bg-white pb-3">
       <div class="row">
         <div class="col-md-10 mx-auto">
-          <form class="row g-3">
-            <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Email</label>
-              <input type="email" class="form-control" id="inputEmail4" />
+          <form 
+            class="row g-3"
+            method="post"
+            enctype="multipart/form-data"
+            action="/player-profile-savedata"
+          >
+            <div class="col-md-8">
+              <label for="txtEmailPlayerProfile" class="form-label"
+                >Email ID</label
+              >
+              <div class="input-group">
+                <input
+                  type="email"
+                  class="form-control col-md-9"
+                  id="txtEmailPlayerProfile"
+                  name="txtEmailPlayerProfile"
+                  value="{{activeUserPlayerEmail}}"
+                  readonly
+                />
+                <button type="button" class="input-group-btn col-md-3 border">
+                  Edit
+                </button>
+              </div>
             </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" />
-            </div>
+            <!-- TODO -->
             <div class="col-md-12">
-              <label for="inputAddress" class="form-label">Address</label>
+              <label for="txtNamePlayerAddress" class="form-label">Address</label>
               <input
                 type="text"
                 class="form-control"
-                id="inputAddress"
-                placeholder="1234 Main St"
-              />
-            </div>
-            <div class="col-md-12">
-              <label for="inputAddress2" class="form-label">Address 2</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputAddress2"
-                placeholder="Apartment, studio, or floor"
+                id="txtNamePlayerProfile"
+                placeholder="#Zone, Street No., Locality..."
               />
             </div>
             <div class="col-md-6">
