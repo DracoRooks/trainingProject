@@ -3,4 +3,5 @@ node_modules/
 public/users/
 core.*
 public/test.html
-public/assets/
+# public/assets/
+public/dump/
