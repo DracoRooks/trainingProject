@@ -103,7 +103,7 @@ $(document).ready(function(){
             }
         };
 
-        $.ajax(obj).then(function(responseArray){ alert(responseArray); }).fail(function(err){ console.log(err); });
+        $.ajax(obj).then(function(responseArray){ /*alert(responseArray);*/ }).fail(function(err){ console.log(err); });
 
         alert("Signed up successfully.");
     })
